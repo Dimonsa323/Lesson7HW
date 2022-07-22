@@ -32,6 +32,7 @@ private extension PlayListVC {
     func setupUI() {
         setupTableView()
         setupNavigationController()
+        
     }
     
     func setupNavigationController() {
@@ -40,13 +41,18 @@ private extension PlayListVC {
         navigationItem.rightBarButtonItem = editButtonItem
     }
     
+//    func setupTabBar() {
+//        title = "Contacs"
+//        tabBarController?.navigationItem
+//    }
+    
   func setupTableView() {
       personTableView.delegate = self
       personTableView.dataSource = self
       
       let nib = UINib(nibName: String(describing: PlayListCell.self), bundle: nil)
       personTableView.register(nib, forCellReuseIdentifier: String(describing: PlayListCell.self))
-
+ 
       //let nib = UINib(nibName: String(describing: PlayListCell.self), bundle: nil)
       //personTableView.register(nib, forCellReuseIdentifier: String(describing: PlayListCell.self))
     }

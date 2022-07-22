@@ -25,6 +25,7 @@ class PersonalListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        hideTabBar()
     }
 }
 
@@ -34,5 +35,9 @@ extension PersonalListVC {
     private func setupUI() {
         phoneInfoLabel.text = infoUser.contactPhone
         mailInfoLabel.text = infoUser.contactMail
+    }
+    
+    func hideTabBar() {
+        self.tabBarController?.tabBar.isHidden = true
     }
 }
