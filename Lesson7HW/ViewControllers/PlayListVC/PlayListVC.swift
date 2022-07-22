@@ -21,6 +21,7 @@ class PlayListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         // Do any additional setup after loading the view.
     }
 }
@@ -30,13 +31,24 @@ class PlayListVC: UIViewController {
 private extension PlayListVC {
     func setupUI() {
         setupTableView()
+        setupNavigationController()
     }
+    
+    func setupNavigationController() {
+        title = "Persons List"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = editButtonItem
+    }
+    
   func setupTableView() {
       personTableView.delegate = self
       personTableView.dataSource = self
       
       let nib = UINib(nibName: String(describing: PlayListCell.self), bundle: nil)
       personTableView.register(nib, forCellReuseIdentifier: String(describing: PlayListCell.self))
+
+      //let nib = UINib(nibName: String(describing: PlayListCell.self), bundle: nil)
+      //personTableView.register(nib, forCellReuseIdentifier: String(describing: PlayListCell.self))
     }
     
     func showDatailUserInfo(person: Person) {
@@ -51,6 +63,7 @@ private extension PlayListVC {
 
 extension PlayListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let person = person[indexPath.row]
         showDatailUserInfo(person: person)
     }
@@ -62,8 +75,9 @@ extension PlayListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PlayListCell.self),
-                                                 for: indexPath) as! PlayListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PlayListCell.self), for: indexPath) as! PlayListCell
+        //let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PlayListCell.self),
+                                                 //for: indexPath) as! PlayListCell
         let user = person[indexPath.row]
         
         cell.config(with: user)
